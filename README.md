@@ -1,4 +1,4 @@
-# Audio Classification with CNN using PyTorch
+# Audio Classification using CNN
 
 ## What is a Mel Spectrogram?
 A spectrogram is a visual representation of sound. It plots time on the x-axis, frequency on the y-axis, and the intensity (loudness) of each frequency at a particular time as color.
