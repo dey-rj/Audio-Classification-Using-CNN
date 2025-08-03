@@ -36,16 +36,18 @@ The goal of this project is to build an effective audio classifier. Raw audio wa
 This project uses the UrbanSound8K dataset, which contains 8732 labeled sound excerpts (each 4 seconds or less).
 
 ### 10 Different Audio Class:
-* air_conditioner
-* car_horn
-* children_playing
-* dog_bark
-* drilling
-* engine_idling
-* gun_shot
-* jackhammer
-* siren
-* street_music
+| Class Name         | Samples |
+|--------------------|---------|
+| dog_bark           | 1000    |
+| children_playing   | 1000    |
+| air_conditioner    | 1000    |
+| street_music       | 1000    |
+| jackhammer         | 1000    |
+| engine_idling      | 1000    |
+| drilling           | 1000    |
+| siren              | 929     |
+| car_horn           | 429     |
+| gun_shot           | 374     |
 
 
 
@@ -78,20 +80,43 @@ The model input is a Mel Spectrogram of shape (1, 128, 174).
 
 The architecture consists of:
 
-* Conv Block 1: Conv2D (16 filters) -> ReLU -> BatchNorm -> MaxPool -> Dropout(0.25)
+---
 
-* Conv Block 2: Conv2D (32 filters) -> ReLU -> BatchNorm -> MaxPool -> Dropout(0.25)
+### Convolutional Blocks
 
-* Conv Block 3: Conv2D (64 filters) -> ReLU -> BatchNorm -> MaxPool -> Dropout(0.30)
+- **Conv Block 1**  
+  `Conv2D (16 filters)` → `ReLU` → `BatchNorm` → `MaxPool` → `Dropout(0.25)`
 
-* Conv Block 4: Conv2D (128 filters) -> ReLU -> BatchNorm -> MaxPool -> Dropout(0.30)
+- **Conv Block 2**  
+  `Conv2D (32 filters)` → `ReLU` → `BatchNorm` → `MaxPool` → `Dropout(0.25)`
 
-* Classifier Head: AdaptiveAvgPool2D -> Flatten -> Linear (128 -> 10)
+- **Conv Block 3**  
+  `Conv2D (64 filters)` → `ReLU` → `BatchNorm` → `MaxPool` → `Dropout(0.30)`
+
+- **Conv Block 4**  
+  `Conv2D (128 filters)` → `ReLU` → `BatchNorm` → `MaxPool` → `Dropout(0.30)`
+
+
+### Classifier Head
+
+- `AdaptiveAvgPool2D` → `Flatten` → `Linear (128 → 10)`
+
 
 ## Results
-The model's performance is tracked throughout training, and the final results are displayed.
+---
 
-**Training accuracy: 95.75%**
+<img src="image\accuracy loss curve.png" alt="Project Logo" width=""/>
+<p align="center"><b>Figure 1:</b> Training & Validation Accuracy/Loss Curve</p>
 
+---
+<img src="image\Test confusion matrix.png" alt="Project Logo" width=""/>
+<p align="center"><b>Figure 2:</b> Confusion Matrix on Test Data</p>
 
-**Test Accuracy: 96%**
+---
+<img src="image\classification report.png" alt="Project Logo" width=""/>
+<p align="center"><b>Figure 3:</b> Per-Class Precision, Recall, and F1-Score</p>
+
+### Overall Performance
+
+- **Training Accuracy:** 99.33%  
+- **Test Accuracy:** 95.59%
